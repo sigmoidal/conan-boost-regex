@@ -3,7 +3,7 @@ from conans import ConanFile, tools, os
 class BoostRegexConan(ConanFile):
     name = "Boost.Regex"
     version = "1.64.0"
-    generators = "boost" 
+    generators = "boost"
     settings = "os", "arch", "compiler", "build_type"
     url = "https://github.com/boostorg/regex"
     description = "Please visit http://www.boost.org/doc/libs/1_64_0/libs/libraries.htm"
@@ -43,7 +43,7 @@ class BoostRegexConan(ConanFile):
           'apple-clang': 'darwin'}
 
         b2_toolset = toolsets[str(self.settings.compiler)]
-        
+
         self.run(b2_full_path + " -j4 -a --hash=yes toolset=" + b2_toolset)
 
     def package(self):
