@@ -7,10 +7,11 @@ class BoostRegexConan(ConanFile):
     settings = "os", "arch", "compiler", "build_type"
     short_paths = True
     url = "https://github.com/bincrafters/conan-boost-regex"
-    source_url = "https://github.com/boostorg/regex"
     description = "Please visit http://www.boost.org/doc/libs/1_64_0/libs/libraries.htm"
     license = "www.boost.org/users/license.html"
     lib_short_names = ["regex"]
+    options = {"shared": [True, False]}
+    default_options = "shared=False"
     build_requires = "Boost.Generator/0.0.1@bincrafters/testing"
     requires =  "Boost.Assert/1.64.0@bincrafters/testing", \
                       "Boost.Concept_Check/1.64.0@bincrafters/testing", \
@@ -29,25 +30,23 @@ class BoostRegexConan(ConanFile):
                       #assert1 concept_check5 config0 core2 functional5 integer3 iterator5 mpl5 predef0 smart_ptr4 static_assert1 throw_exception2 type_traits3
 
     def source(self):
+        boostorg_github = "https://github.com/boostorg"
+        archive_name = "boost-" + version        
         for lib_short_name in self.lib_short_names:
-            self.run("git clone --depth=1 --branch=boost-{0} https://github.com/boostorg/{1}.git"
-                     .format(self.version, lib_short_name)) 
+            tools.get("{0}/{1}/archive/{2}.tar.gz"
+                .format(boostorg_github, lib_short_name, archive_name))
+            os.rename(lib_short_name + "-" + archive_name, lib_short_name)
 
     def build(self):
-        boost_build = self.deps_cpp_info["Boost.Build"]
-        b2_bin_name = "b2.exe" if self.settings.os == "Windows" else "b2"
-        b2_bin_dir_name = boost_build.bindirs[0]
-        b2_full_path = os.path.join(boost_build.rootpath, b2_bin_dir_name, b2_bin_name)
-
-        self.run(b2_full_path + " -j4 -a --hash=yes")
+        self.run(self.deps_user_info['Boost.Generator'].b2_command)
 
     def package(self):
+        self.copy(pattern="*", dst="lib", src="stage/lib")
         for lib_short_name in self.lib_short_names:
             include_dir = os.path.join(lib_short_name, "include")
-            self.copy(pattern="*", dst="include", src=include_dir)		
-
-        self.copy(pattern="*", dst="lib", src="stage/lib")
+            self.copy(pattern="*", dst="include", src=include_dir)
 
     def package_info(self):
-        self.user_info.lib_short_names = (",").join(self.lib_short_names)
+        self.user_info.lib_short_names = ",".join(self.lib_short_names)
         self.cpp_info.libs = self.collect_libs()
+        self.cpp_info.defines.append("BOOST_ALL_NO_LIB=1")
