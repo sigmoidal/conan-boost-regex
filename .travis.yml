@@ -12,7 +12,7 @@ install:
 script:
   - export CONAN_REFERENCE_FULL=${CONAN_REFERENCE}@${CONAN_SUBJECT}/${CONAN_CHANNEL}
   - echo ${CONAN_REFERENCE_FULL}
-  - conan create ${CONAN_SUBJECT}/${CONAN_CHANNEL}
   - conan remote add ${CONAN_SUBJECT} "https://api.bintray.com/conan/${CONAN_SUBJECT}/${CONAN_REPO}"
+  - conan create ${CONAN_SUBJECT}/${CONAN_CHANNEL}
   - conan user -p ${CONAN_KEY} --remote ${CONAN_SUBJECT} ${CONAN_USER}
   - conan upload --all --remote ${CONAN_SUBJECT} ${CONAN_REFERENCE_FULL}
