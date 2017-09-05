@@ -38,7 +38,7 @@ class BoostRegexConan(ConanFile):
             os.rename(lib_short_name + "-" + archive_name, lib_short_name)
 
     def build(self):
-        self.run(self.deps_user_info['Boost.Generator'].b2_command)
+        self.run(self.deps_user_info['Boost.Generator'].b2_command + " --disable-icu")
 
     def package(self):
         self.copy(pattern="*", dst="lib", src="stage/lib")
