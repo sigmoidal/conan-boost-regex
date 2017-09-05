@@ -31,14 +31,6 @@ install:
   - ./.travis/install.sh
 
 script:
-<<<<<<< HEAD
   - chmod +x .travis/run.sh
   - ./.travis/run.sh
-=======
-  - export CONAN_REFERENCE_FULL=${CONAN_REFERENCE}@${CONAN_SUBJECT}/${CONAN_CHANNEL}
-  - echo ${CONAN_REFERENCE_FULL}
-  - conan remote add ${CONAN_SUBJECT} "https://api.bintray.com/conan/${CONAN_SUBJECT}/${CONAN_REPO}"
-  - conan create ${CONAN_SUBJECT}/${CONAN_CHANNEL} --build missing
-  - conan user -p ${CONAN_KEY} --remote ${CONAN_SUBJECT} ${CONAN_USER}
-  - conan upload --all --remote ${CONAN_SUBJECT} ${CONAN_REFERENCE_FULL}
->>>>>>> master
+
