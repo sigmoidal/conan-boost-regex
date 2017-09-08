@@ -41,7 +41,8 @@ class BoostRegexConan(ConanFile):
         self.run(self.deps_user_info['Boost.Generator'].b2_command + " --disable-icu")
 
     def package(self):
-        self.copy(pattern="*", dst="lib", src="stage/lib")
+        self.copy(pattern="*.lib", dst="lib", src="stage/lib")
+        self.copy(pattern="*.dll", dst="bin", src="stage/lib")
         for lib_short_name in self.lib_short_names:
             include_dir = os.path.join(lib_short_name, "include")
             self.copy(pattern="*", dst="include", src=include_dir)
