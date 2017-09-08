@@ -6,7 +6,7 @@ class BoostRegexTestConan(ConanFile):
     generators = "cmake"
     username = os.getenv("CONAN_USERNAME", "bincrafters")
     channel = os.getenv("CONAN_CHANNEL", "testing")
-    requires = "Boost.Regex/1.64.0@%s/%s" % (username, channel)
+    requires = "Catch/1.9.6@uilianries/stable", "Boost.Regex/1.64.0@%s/%s" % (username, channel)
 
     def build(self):
         cmake = CMake(self)
@@ -14,6 +14,7 @@ class BoostRegexTestConan(ConanFile):
         cmake.build()
 
     def imports(self):
+        self.copy("*.so*", dst="bin", src="lib")
         self.copy("*.dll", dst="bin", src="bin")
         self.copy("*.dylib*", dst="bin", src="lib")
 

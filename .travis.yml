@@ -5,6 +5,7 @@ env:
      - CONAN_STABLE_BRANCH_PATTERN: "release/*"
      - CONAN_USERNAME: "bincrafters"
      - CONAN_UPLOAD: "https://api.bintray.com/conan/bincrafters/public-conan"
+     - CONAN_REMOTES: "https://api.bintray.com/conan/uilianries/conan"
      - CONAN_UPLOAD_ONLY_WHEN_STABLE: 1
 
 linux: &linux
@@ -33,4 +34,3 @@ install:
 script:
   - chmod +x .travis/run.sh
   - ./.travis/run.sh
-

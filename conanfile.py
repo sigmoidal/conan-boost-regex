@@ -11,7 +11,7 @@ class BoostRegexConan(ConanFile):
     license = "www.boost.org/users/license.html"
     lib_short_names = ["regex"]
     options = {"shared": [True, False]}
-    default_options = "shared=False"
+    default_options = "shared=True"
     build_requires = "Boost.Generator/0.0.1@bincrafters/testing"
     requires =  "Boost.Assert/1.64.0@bincrafters/testing", \
                       "Boost.Concept_Check/1.64.0@bincrafters/testing", \
@@ -31,7 +31,7 @@ class BoostRegexConan(ConanFile):
 
     def source(self):
         boostorg_github = "https://github.com/boostorg"
-        archive_name = "boost-" + self.version  
+        archive_name = "boost-" + self.version
         for lib_short_name in self.lib_short_names:
             tools.get("{0}/{1}/archive/{2}.tar.gz"
                 .format(boostorg_github, lib_short_name, archive_name))
