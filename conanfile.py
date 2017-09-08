@@ -1,5 +1,6 @@
 from conans import ConanFile, tools, os
 
+
 class BoostRegexConan(ConanFile):
     name = "Boost.Regex"
     version = "1.64.0"
@@ -41,11 +42,7 @@ class BoostRegexConan(ConanFile):
         self.run(self.deps_user_info['Boost.Generator'].b2_command + " --disable-icu")
 
     def package(self):
-        self.copy(pattern="*.lib", dst="lib", src="stage/lib", keep_path=False)
-        self.copy(pattern="*.so*", dst="lib", src="stage/lib", keep_path=False)
-        self.copy(pattern="*.a", dst="lib", src="stage/lib", keep_path=False)
-        self.copy(pattern="*.dylib", dst="lib", src="stage/lib", keep_path=False)
-        self.copy(pattern="*.dll", dst="bin", src="stage/lib", keep_path=False)
+        self.copy(pattern="*", dst="lib", src="stage/lib")
         for lib_short_name in self.lib_short_names:
             include_dir = os.path.join(lib_short_name, "include")
             self.copy(pattern="*", dst="include", src=include_dir)

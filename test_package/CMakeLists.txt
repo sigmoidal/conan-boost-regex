@@ -1,4 +1,4 @@
-project(boost-regex-test CXX)
+project(test_package CXX)
 cmake_minimum_required(VERSION 2.8.12)
 
 set(CMAKE_VERBOSE_MAKEFILE TRUE)
