@@ -26,7 +26,7 @@ class BoostRegexConan(ConanFile):
                       "Boost.Smart_Ptr/1.64.0@bincrafters/testing", \
                       "Boost.Static_Assert/1.64.0@bincrafters/testing", \
                       "Boost.Throw_Exception/1.64.0@bincrafters/testing",\
-                      "Boost.Type_Traits/1.64.0@bincrafters/testing"
+                      "Boost.Type_Traits/1.64.0@bincrafters/testing"    
 
                       #assert1 concept_check5 config0 core2 functional5 integer3 iterator5 mpl5 predef0 smart_ptr4 static_assert1 throw_exception2 type_traits3
 
