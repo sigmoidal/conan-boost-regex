@@ -13,7 +13,7 @@ class BoostRegexConan(ConanFile):
     lib_short_names = ["regex"]
     options = {"shared": [True, False]}
     default_options = "shared=True"
-    build_requires = "Boost.Generator/0.0.1@bincrafters/testing"
+    build_requires = "Boost.Generator/1.64.0@bincrafters/testing"
     requires =  "Boost.Assert/1.64.0@bincrafters/testing", \
                       "Boost.Concept_Check/1.64.0@bincrafters/testing", \
                       "Boost.Config/1.64.0@bincrafters/testing", \
