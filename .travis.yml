@@ -1,7 +1,7 @@
 
 env:
    global:
-     - CONAN_REFERENCE: "Boost.Regex/1.64.0"
+     - CONAN_REFERENCE: "Boost.Regex/1.65.1"
      - CONAN_USERNAME: "bincrafters"
      - CONAN_CHANNEL: "testing"
      - CONAN_UPLOAD: "https://api.bintray.com/conan/bincrafters/public-conan"
