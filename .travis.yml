@@ -1,14 +1,4 @@
-
-env:
-   global:
-     - CONAN_REFERENCE: "Boost.Regex/1.64.0"
-     - CONAN_USERNAME: "bincrafters"
-     - CONAN_CHANNEL: "testing"
-     - CONAN_UPLOAD: "https://api.bintray.com/conan/bincrafters/public-conan"
-     - CONAN_REMOTES: "https://api.bintray.com/conan/uilianries/conan"
-     - CONAN_UPLOAD_ONLY_WHEN_STABLE: "TRUE"
-     - CONAN_STABLE_BRANCH_PATTERN: "release/*"
-
+    
 linux: &linux
    os: linux
    sudo: required
@@ -16,12 +6,42 @@ linux: &linux
    python: "3.6"
    services:
      - docker
+   install:
+     - chmod +x .travis/install.sh
+     - ./.travis/install.sh
+   script:
+     - chmod +x .travis/run.sh
+     - ./.travis/run.sh
+
 osx: &osx
    os: osx
    language: generic
+   install:
+     - chmod +x .travis/install.sh
+     - ./.travis/install.sh
+   script:
+     - chmod +x .travis/run.sh
+     - ./.travis/run.sh
+
+build: &build
+   language: cpp
+   sudo: false
+   addons:
+     apt:
+       packages:
+       - libpcap-dev
+       - libssl-dev
+       - libboost-all-dev
+   before_script:
+   - mkdir build
+   - cd build
+   - cmake .. -DLIBTINS_ENABLE_CXX11=1
+   - make tests
+   script:
+   - ctest -V
+
 matrix:
    include:
-
       - <<: *linux
         env: CONAN_GCC_VERSIONS=4.9 CONAN_DOCKER_IMAGE=lasote/conangcc49
 
@@ -37,10 +57,34 @@ matrix:
       - <<: *linux
         env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40
 
-install:
-  - chmod +x .travis/install.sh
-  - ./.travis/install.sh
+      - <<: *osx
+        osx_image: xcode7.3
+        env: CONAN_APPLE_CLANG_VERSIONS=7.3
 
-script:
-  - chmod +x .travis/run.sh
-  - ./.travis/run.sh
+      - <<: *osx
+        osx_image: xcode8.2
+        env: CONAN_APPLE_CLANG_VERSIONS=8.0
+
+      - <<: *osx
+        osx_image: xcode8.3
+        env: CONAN_APPLE_CLANG_VERSIONS=8.1
+
+      - <<: *build
+        os: linux
+        compiler:
+           - gcc
+
+      - <<: *build
+        os: linux
+        compiler:
+           - clang
+
+      - <<: *build
+        os: osx
+        compiler:
+           - gcc
+
+      - <<: *build
+        os: osx
+        compiler:
+           - clang

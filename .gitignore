@@ -29,9 +29,11 @@
 *.app
 
 # Directories
+.idea
 __pycache__
-build/
-Debug*
+init.bat
+upload.bat
+build*/
 bin*
 .vs
 .vscode*
