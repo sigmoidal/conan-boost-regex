@@ -13,20 +13,20 @@ class BoostRegexConan(ConanFile):
     lib_short_names = ["regex"]
     options = {"shared": [True, False]}
     default_options = "shared=True"
-    build_requires = "Boost.Generator/1.65.1@bincrafters/stable"
-    requires =  "Boost.Assert/1.65.1@bincrafters/stable", \
-                      "Boost.Concept_Check/1.65.1@bincrafters/stable", \
-                      "Boost.Config/1.65.1@bincrafters/stable", \
-                      "Boost.Core/1.65.1@bincrafters/stable", \
-                      "Boost.Functional/1.65.1@bincrafters/stable", \
-                      "Boost.Integer/1.65.1@bincrafters/stable", \
-                      "Boost.Iterator/1.65.1@bincrafters/stable", \
-                      "Boost.Mpl/1.65.1@bincrafters/stable", \
-                      "Boost.Predef/1.65.1@bincrafters/stable", \
-                      "Boost.Smart_Ptr/1.65.1@bincrafters/stable", \
-                      "Boost.Static_Assert/1.65.1@bincrafters/stable", \
-                      "Boost.Throw_Exception/1.65.1@bincrafters/stable",\
-                      "Boost.Type_Traits/1.65.1@bincrafters/stable"    
+    build_requires = "Boost.Generator/1.65.1@bincrafters/testing"
+    requires =  "Boost.Assert/1.65.1@bincrafters/testing", \
+                      "Boost.Concept_Check/1.65.1@bincrafters/testing", \
+                      "Boost.Config/1.65.1@bincrafters/testing", \
+                      "Boost.Core/1.65.1@bincrafters/testing", \
+                      "Boost.Functional/1.65.1@bincrafters/testing", \
+                      "Boost.Integer/1.65.1@bincrafters/testing", \
+                      "Boost.Iterator/1.65.1@bincrafters/testing", \
+                      "Boost.Mpl/1.65.1@bincrafters/testing", \
+                      "Boost.Predef/1.65.1@bincrafters/testing", \
+                      "Boost.Smart_Ptr/1.65.1@bincrafters/testing", \
+                      "Boost.Static_Assert/1.65.1@bincrafters/testing", \
+                      "Boost.Throw_Exception/1.65.1@bincrafters/testing",\
+                      "Boost.Type_Traits/1.65.1@bincrafters/testing"    
 
                       #assert1 concept_check5 config0 core2 functional5 integer3 iterator5 mpl5 predef0 smart_ptr4 static_assert1 throw_exception2 type_traits3
 
