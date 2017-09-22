@@ -11,8 +11,8 @@ class BoostRegexConan(ConanFile):
     description = "Please visit http://www.boost.org/doc/libs/1_64_0/libs/libraries.htm"
     license = "www.boost.org/users/license.html"
     lib_short_names = ["regex"]
-    options = {"shared": [True, False]}
-    default_options = "shared=True"
+    options = {"shared": [True, False], "use_icu": [True, False]}
+    default_options = "shared=True", "use_icu=False"
     build_requires = "Boost.Generator/1.64.0@bincrafters/testing"
     requires =  "Boost.Assert/1.64.0@bincrafters/testing", \
                       "Boost.Concept_Check/1.64.0@bincrafters/testing", \
@@ -30,6 +30,10 @@ class BoostRegexConan(ConanFile):
 
                       #assert1 concept_check5 config0 core2 functional5 integer3 iterator5 mpl5 predef0 smart_ptr4 static_assert1 throw_exception2 type_traits3
 
+    def requirements(self):
+        if self.options.use_icu:
+            self.requires("icu/59.1@bincrafters/testing")
+
     def source(self):
         boostorg_github = "https://github.com/boostorg"
         archive_name = "boost-" + self.version
@@ -39,7 +43,7 @@ class BoostRegexConan(ConanFile):
             os.rename(lib_short_name + "-" + archive_name, lib_short_name)
 
     def build(self):
-        self.run(self.deps_user_info['Boost.Generator'].b2_command + " --disable-icu")
+        self.run(self.deps_user_info['Boost.Generator'].b2_command)
 
     def package(self):
         self.copy(pattern="*", dst="lib", src="stage/lib")
