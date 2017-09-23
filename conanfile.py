@@ -29,6 +29,7 @@ class BoostRegexConan(ConanFile):
                       "Boost.Type_Traits/1.65.1@bincrafters/testing"    
 
                       #assert1 concept_check5 config0 core2 functional5 integer3 iterator5 mpl5 predef0 smart_ptr4 static_assert1 throw_exception2 type_traits3
+                      
     def requirements(self):
         if self.options.use_icu:
             self.requires("icu/59.1@bincrafters/stable")
