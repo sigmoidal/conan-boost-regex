@@ -32,7 +32,7 @@ class BoostRegexConan(ConanFile):
                       
     def requirements(self):
         if self.options.use_icu:
-            self.requires("icu/59.1@bincrafters/stable")
+            self.requires("icu/59.1@bincrafters/testing")
             
     def source(self):
         boostorg_github = "https://github.com/boostorg"
