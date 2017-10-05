@@ -12,7 +12,7 @@ class BoostRegexConan(ConanFile):
     license = "www.boost.org/users/license.html"
     lib_short_names = ["regex"]
     options = {"shared": [True, False], "use_icu": [True, False]}
-    default_options = "shared=False", "use_icu=True"
+    default_options = "shared=False", "use_icu=False"
     build_requires = "Boost.Generator/1.64.0@bincrafters/testing"
     requires =  "Boost.Assert/1.64.0@bincrafters/testing", \
                       "Boost.Concept_Check/1.64.0@bincrafters/testing", \
