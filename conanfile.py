@@ -43,7 +43,11 @@ class BoostRegexConan(ConanFile):
             os.rename(lib_short_name + "-" + archive_name, lib_short_name)
 
     def build(self):
-        self.run(self.deps_user_info['Boost.Generator'].b2_command)
+        icu_path_cmd = ''
+        if self.options.use_icu:
+            icu_path_cmd = "ICU_PATH={0}".format(self.deps_cpp_info["icu"].rootpath)        
+        
+        self.run("{0} {1}".format(icu_path_cmd, self.deps_user_info['Boost.Generator'].b2_command))
 
     def package(self):
         self.copy(pattern="*", dst="lib", src="stage/lib")
