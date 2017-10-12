@@ -53,7 +53,7 @@ class BoostRegexConan(ConanFile):
             #self.output.info("cur: " + os.path.join(os.getcwd(), 'regex', 'build'))
             
             # to apply in subfolder
-            tools.patch(base_path=os.path.join('regex', 'build'), patch_file="Jamfile.v2.patch") 
+            #tools.patch(base_path=os.path.join('regex', 'build'), patch_file="Jamfile.v2.patch") 
             exit
             
     def build(self):
