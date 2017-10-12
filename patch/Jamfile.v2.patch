@@ -1,5 +1,5 @@
---- Jamfile.v2.old	2017-10-12 02:38:09.133026300 +0300
-+++ Jamfile.v2-new	2017-10-12 02:37:20.791238300 +0300
+--- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
++++ Jamfile_new.v2	2017-10-12 02:37:20.791238300 +0300
 @@ -54,16 +54,27 @@
        lib icuuc : :                                                  <name>sicuuc <runtime-link>static <conditional>@path_options ;
        lib icuuc : : <toolset>msvc                     <variant>debug <name>sicuucd <runtime-link>static <conditional>@path_options ;

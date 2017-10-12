@@ -41,28 +41,25 @@ class BoostRegexConan(ConanFile):
             tools.get("{0}/{1}/archive/{2}.tar.gz"
                 .format(boostorg_github, lib_short_name, archive_name))
             os.rename(lib_short_name + "-" + archive_name, lib_short_name)
-
+            
+        if self.options.use_icu:
+            # we need to patch the Jamfile.v2 of Boost.Regex (has_icu_test) when building static on windows 
+            #if not self.options.shared and self.settings.os == 'Windows':
+            tools.download(r'https://raw.githubusercontent.com/sigmoidal/conan-boost-regex/testing/1.65.1/patch/Jamfile.v2.patch', 'Jamfile.v2.patch');
+             
+            src_path = os.path.join(self.conanfile_directory, 'regex')
+            jamfile_to_patch = os.path.join(src_path, 'build', 'Jamfile.v2')
+            self.output.info("Patching: " + jamfile_to_patch)
+            #self.output.info("cur: " + os.path.join(os.getcwd(), 'regex', 'build'))
+            
+            # to apply in subfolder
+            tools.patch(base_path=os.path.join('regex', 'build'), patch_file="Jamfile.v2.patch") 
+            exit
+            
     def build(self):
         if self.options.use_icu:
             os.environ["ICU_PATH"] = self.deps_cpp_info["icu"].rootpath
             self.output.info("Using ICU_PATH: " + os.environ["ICU_PATH"])
-        
-            # we need to patch the Jamfile.v2 of Boost.Regex when building static on windows
-            # has_icu_test
-            if not self.options.shared and self.settings.os == 'Windows':
-                src_path = os.path.join(self.conanfile_directory, 'regex')
-                jamfile_to_patch = os.path.join(src_path, 'build', 'Jamfile.v2')
-                self.output.info("Patching: " + jamfile_to_patch)
-                self.output.info("cur: " + os.getcwd())
-                
-                # to apply in subfolder
-                tools.patch(base_path=os.path.join(src_path, 'build'), patch_file="patch/Jamfile.v2.patch")
-
-                #lib icuuc : : <toolset>msvc  <target-os>windows                <name>sicuuc  <link>static <runtime-link>shared <conditional>@path_options ;
-                #lib icuuc : : <toolset>msvc  <target-os>windows <variant>debug <name>sicuucd <link>static <runtime-link>shared <conditional>@path_options ;
-      
-      
-                exit
             
         self.run(self.deps_user_info['Boost.Generator'].b2_command)
 
