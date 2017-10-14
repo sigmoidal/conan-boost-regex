@@ -58,10 +58,10 @@ if ! $(disable-icu)
       lib icuuc : : <toolset>msvc                     <variant>debug <name>sicuucd <runtime-link>shared <link>static <conditional>@path_options ;
       lib icuuc : : <toolset>msvc                     <variant>debug <name>icuucd <runtime-link>shared <link>shared <conditional>@path_options ;
 	  
-      lib icuuc : : <toolset>darwin                                  <name>sicuuc <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icuuc : : <toolset>darwin                                  <name>icuuc <runtime-link>shared <link>static <conditional>@path_options ;
       lib icuuc : : <toolset>darwin                                  <name>icuuc <runtime-link>shared <link>shared <conditional>@path_options ;	  
-      lib icuuc : : <toolset>darwin                   <variant>debug <name>sicuucd <runtime-link>shared <link>static <conditional>@path_options ;
-      lib icuuc : : <toolset>darwin                   <variant>debug <name>icuucd <runtime-link>shared <link>shared <conditional>@path_options ;
+      lib icuuc : : <toolset>darwin                   <variant>debug <name>icuuc <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icuuc : : <toolset>darwin                   <variant>debug <name>icuuc <runtime-link>shared <link>shared <conditional>@path_options ;
 	  
       lib icuuc : : <name>this_is_an_invalid_library_name ;
 	  
@@ -76,10 +76,10 @@ if ! $(disable-icu)
       lib icudt : : <toolset>msvc                     <variant>debug <name>sicudtd <runtime-link>shared <link>static <conditional>@path_options ;
       lib icudt : : <toolset>msvc                     <variant>debug <name>icudtd <runtime-link>shared <link>shared <conditional>@path_options ;
 
-      lib icudt : : <toolset>darwin                                  <name>sicudt <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icudt : : <toolset>darwin                                  <name>icudt <runtime-link>shared <link>static <conditional>@path_options ;
       lib icudt : : <toolset>darwin                                  <name>icudt <runtime-link>shared <link>shared <conditional>@path_options ;	  
-      lib icudt : : <toolset>darwin                   <variant>debug <name>sicudtd <runtime-link>shared <link>static <conditional>@path_options ;
-      lib icudt : : <toolset>darwin                   <variant>debug <name>icudtd <runtime-link>shared <link>shared <conditional>@path_options ;
+      lib icudt : : <toolset>darwin                   <variant>debug <name>icudt <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icudt : : <toolset>darwin                   <variant>debug <name>icudt <runtime-link>shared <link>shared <conditional>@path_options ;
 	  
       lib icudt : : <name>this_is_an_invalid_library_name ;
 	  
@@ -96,10 +96,10 @@ if ! $(disable-icu)
       lib icuin : : <toolset>msvc                     <variant>debug <name>sicuind <runtime-link>shared <link>static <conditional>@path_options ;
       lib icuin : : <toolset>msvc                     <variant>debug <name>icuind <runtime-link>shared <link>shared <conditional>@path_options ;
 
-      lib icui18n : : <toolset>darwin                                <name>sicui18n <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icui18n : : <toolset>darwin                                <name>icui18n <runtime-link>shared <link>static <conditional>@path_options ;
       lib icui18n : : <toolset>darwin                                <name>icui18n <runtime-link>shared <link>shared <conditional>@path_options ;	  
-      lib icui18n : : <toolset>darwin                 <variant>debug <name>sicui18nd <runtime-link>shared <link>static <conditional>@path_options ;
-      lib icui18n : : <toolset>darwin                 <variant>debug <name>icui18nd <runtime-link>shared <link>shared <conditional>@path_options ;
+      lib icui18n : : <toolset>darwin                 <variant>debug <name>icui18n <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icui18n : : <toolset>darwin                 <variant>debug <name>icui18n <runtime-link>shared <link>shared <conditional>@path_options ;
 	  
       lib icuin : : <name>this_is_an_invalid_library_name ;
 
