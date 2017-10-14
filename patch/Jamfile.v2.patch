@@ -1,6 +1,6 @@
 --- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
-+++ Jamfile_new.v2	2017-10-14 04:28:45.273054400 +0300
-@@ -49,49 +49,76 @@
++++ Jamfile_new.v2	2017-10-14 04:41:44.195965100 +0300
+@@ -49,48 +49,77 @@
     else
     {
        lib icuuc : :                                                               <runtime-link>shared <conditional>@path_options ;
@@ -31,19 +31,19 @@
        lib icudt : : <name>sicudata                                   <runtime-link>static <conditional>@path_options ;
 -      lib icudt : : <name>sicudt   <toolset>msvc                     <runtime-link>static <conditional>@path_options ;
        lib icudt : : <name>sicudt   <toolset>intel <target-os>windows <runtime-link>static <conditional>@path_options ;
+-      lib icudt : : <name>this_is_an_invalid_library_name ;
 +	  
 +      lib icudt : : <toolset>msvc                                    <name>sicudt <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icudt : : <toolset>msvc                                    <name>icudt <runtime-link>shared <link>shared <conditional>@path_options ;	  
 +      lib icudt : : <toolset>msvc                     <variant>debug <name>sicudtd <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icudt : : <toolset>msvc                     <variant>debug <name>icudtd <runtime-link>shared <link>shared <conditional>@path_options ;
-+
+ 
 +      lib icudt : : <toolset>darwin                                  <name>icudata <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icudt : : <toolset>darwin                                  <name>icudata <runtime-link>shared <link>shared <conditional>@path_options ;	  
 +      lib icudt : : <toolset>darwin                   <variant>debug <name>icudata <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icudt : : <toolset>darwin                   <variant>debug <name>icudata <runtime-link>shared <link>shared <conditional>@path_options ;
 +	  
-       lib icudt : : <name>this_is_an_invalid_library_name ;
--
++      lib icudt : : <name>this_is_an_invalid_library_name ;
 +	  
 +	  
        lib icuin : :                                                    <name>icui18n <runtime-link>shared <conditional>@path_options ;
@@ -83,13 +83,13 @@
           <define>BOOST_HAS_ICU=1 
 -         <runtime-link>static:<define>U_STATIC_IMPLEMENTATION=1
 +         <link>static:<define>U_STATIC_IMPLEMENTATION=1
++		 <toolset>msvc:<linkflags>advapi32.lib
           ;
     }
  
  }
  
--unit-test has_icu : has_icu_test.cpp : $(ICU_OPTS) ;
-+unit-test has_icu : has_icu_test.cpp : $(ICU_OPTS) <linkflags>advapi32.lib ;
++
+ unit-test has_icu : has_icu_test.cpp : $(ICU_OPTS) ;
  explicit has_icu ;
  
- alias icu_options : : : : [ check-target-builds has_icu : $(ICU_OPTS) : ] ;
