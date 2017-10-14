@@ -26,9 +26,11 @@ def main(target_os):
     archs = [ "x86", "x86_64" ]
     build_types = [ "Release", "Debug" ]
     shared = [ True, False ]
-    compiler_versions = [ "15", "14" ]
-    
+
     if target_os == 'win':
+        
+        compiler_versions = [ "15", "14" ]
+        
         # process arguments
         for arch in archs:
             for compiler_version in compiler_versions:

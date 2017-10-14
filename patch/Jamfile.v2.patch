@@ -1,6 +1,23 @@
---- Jamfile.v2	2017-10-14 04:53:47.324000000 +0300
-+++ Jamfile_new.v2	2017-10-14 18:35:25.410087800 +0300
-@@ -49,48 +49,94 @@
+--- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
++++ Jamfile_new.v2	2017-10-14 20:11:00.022055800 +0300
+@@ -24,6 +24,16 @@
+     {
+     	result = <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
+     }
++	
++#<toolset>msvc:<linkflags>advapi32.lib
++#<toolset>gcc:<cxxflags>-std=c++11
++#<toolset>gcc <link>static:<linkflags>-ldl
++
++	if <toolset>msvc in $(properties)
++	{
++    	result = $(result) <linkflags>advapi32.lib ;
++    }
++	
+     return $(result) ;
+ }
+ 
+@@ -49,48 +59,94 @@
     else
     {
        lib icuuc : :                                                               <runtime-link>shared <conditional>@path_options ;
@@ -36,13 +53,12 @@
        lib icudt : : <name>sicudata                                   <runtime-link>static <conditional>@path_options ;
 -      lib icudt : : <name>sicudt   <toolset>msvc                     <runtime-link>static <conditional>@path_options ;
        lib icudt : : <name>sicudt   <toolset>intel <target-os>windows <runtime-link>static <conditional>@path_options ;
--      lib icudt : : <name>this_is_an_invalid_library_name ;
 +	  
 +      lib icudt : : <toolset>msvc                                    <name>sicudt <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icudt : : <toolset>msvc                                    <name>icudt <runtime-link>shared <link>shared <conditional>@path_options ;	  
 +      lib icudt : : <toolset>msvc                     <variant>debug <name>sicudtd <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icudt : : <toolset>msvc                     <variant>debug <name>icudtd <runtime-link>shared <link>shared <conditional>@path_options ;
- 
++
 +      lib icudt : : <toolset>darwin                                  <name>icudata <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icudt : : <toolset>darwin                                  <name>icudata <runtime-link>shared <link>shared <conditional>@path_options ;	  
 +      lib icudt : : <toolset>darwin                   <variant>debug <name>icudata <runtime-link>shared <link>static <conditional>@path_options ;
@@ -53,7 +69,8 @@
 +      lib icudt : : <toolset>gcc                      <variant>debug <name>icudata <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icudt : : <toolset>gcc                      <variant>debug <name>icudata <runtime-link>shared <link>shared <conditional>@path_options ;
 +	  
-+      lib icudt : : <name>this_is_an_invalid_library_name ;
+       lib icudt : : <name>this_is_an_invalid_library_name ;
+-
 +	  
 +	  
        lib icuin : :                                                    <name>icui18n <runtime-link>shared <conditional>@path_options ;

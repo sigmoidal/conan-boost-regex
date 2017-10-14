@@ -24,6 +24,16 @@ rule path_options ( properties * )
     {
     	result = <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
     }
+	
+#<toolset>msvc:<linkflags>advapi32.lib
+#<toolset>gcc:<cxxflags>-std=c++11
+#<toolset>gcc <link>static:<linkflags>-ldl
+
+	if <toolset>msvc in $(properties)
+	{
+    	result = $(result) <linkflags>advapi32.lib ;
+    }
+	
     return $(result) ;
 }
 
