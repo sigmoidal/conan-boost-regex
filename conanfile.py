@@ -58,6 +58,7 @@ class BoostRegexConan(ConanFile):
             
     def build(self):
         if self.options.use_icu:
+            self.deps_cpp_info["icu"].cppflags
             os.environ["ICU_PATH"] = self.deps_cpp_info["icu"].rootpath
             self.output.info("Using ICU_PATH: " + os.environ["ICU_PATH"])
             
