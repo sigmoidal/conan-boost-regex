@@ -1,23 +1,39 @@
 --- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
-+++ Jamfile_new.v2	2017-10-14 20:11:00.022055800 +0300
-@@ -24,6 +24,16 @@
-     {
-     	result = <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
-     }
++++ Jamfile_new.v2	2017-10-14 20:31:54.426344900 +0300
+@@ -16,14 +16,30 @@
+ rule path_options ( properties * )
+ {
+     local result ;
 +	
-+#<toolset>msvc:<linkflags>advapi32.lib
-+#<toolset>gcc:<cxxflags>-std=c++11
-+#<toolset>gcc <link>static:<linkflags>-ldl
-+
 +	if <toolset>msvc in $(properties)
 +	{
-+    	result = $(result) <linkflags>advapi32.lib ;
++    	result = <linkflags>advapi32.lib ;
 +    }
++	else if <toolset>gcc in $(properties)
++	{
++		result = <cxxflags>-std=c++11 ;
++		
++		if <link>static in $(properties)
++		{
++			result = $(result) <linkflags>-ldl ;
++		}
++	}
++	
+     if <address-model>64 in $(properties) && <toolset>msvc in $(properties) 
+     {
+-    	result = <search>$(ICU_PATH)/bin64 <search>$(ICU_PATH)/lib64 ;
++    	result = $(result) <search>$(ICU_PATH)/bin64 <search>$(ICU_PATH)/lib64 ;
+     }
+     else
+     {
+-    	result = <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
++    	result = $(result) <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
+     }
 +	
      return $(result) ;
  }
  
-@@ -49,48 +59,94 @@
+@@ -49,48 +65,95 @@
     else
     {
        lib icuuc : :                                                               <runtime-link>shared <conditional>@path_options ;
@@ -115,14 +131,15 @@
           <define>BOOST_HAS_ICU=1 
 -         <runtime-link>static:<define>U_STATIC_IMPLEMENTATION=1
 +         <link>static:<define>U_STATIC_IMPLEMENTATION=1
-+		 <toolset>msvc:<linkflags>advapi32.lib
-+		 <toolset>gcc:<cxxflags>-std=c++11
-+		 <toolset>gcc <link>static:<linkflags>-ldl
           ;
     }
  
  }
  
++#		 <toolset>msvc:<linkflags>advapi32.lib
++#		 <toolset>gcc:<cxxflags>-std=c++11
++#		 <toolset>gcc <link>static:<linkflags>-ldl
++		 
 +
  unit-test has_icu : has_icu_test.cpp : $(ICU_OPTS) ;
  explicit has_icu ;

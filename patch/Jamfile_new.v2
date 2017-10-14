@@ -16,29 +16,29 @@ local disable-icu = [ MATCH (--disable-icu) : [ modules.peek : ARGV ] ] ;
 rule path_options ( properties * )
 {
     local result ;
-    if <address-model>64 in $(properties) && <toolset>msvc in $(properties) 
-    {
-    	result = <search>$(ICU_PATH)/bin64 <search>$(ICU_PATH)/lib64 ;
-    }
-    else
-    {
-    	result = <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
-    }
 	
 	if <toolset>msvc in $(properties)
 	{
-    	result = $(result) <linkflags>advapi32.lib ;
+    	result = <linkflags>advapi32.lib ;
     }
-	
-	if <toolset>gcc in $(properties)
+	else if <toolset>gcc in $(properties)
 	{
-		result = $(result) <cxxflags>-std=c++11 ;
+		result = <cxxflags>-std=c++11 ;
 		
 		if <link>static in $(properties)
 		{
 			result = $(result) <linkflags>-ldl ;
 		}
 	}
+	
+    if <address-model>64 in $(properties) && <toolset>msvc in $(properties) 
+    {
+    	result = $(result) <search>$(ICU_PATH)/bin64 <search>$(ICU_PATH)/lib64 ;
+    }
+    else
+    {
+    	result = $(result) <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
+    }
 	
     return $(result) ;
 }
