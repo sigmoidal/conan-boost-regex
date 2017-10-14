@@ -1,5 +1,5 @@
 --- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
-+++ Jamfile_new.v2	2017-10-14 04:12:19.000000000 +0300
++++ Jamfile_new.v2	2017-10-14 04:28:45.273054400 +0300
 @@ -49,49 +49,76 @@
     else
     {
@@ -37,10 +37,10 @@
 +      lib icudt : : <toolset>msvc                     <variant>debug <name>sicudtd <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icudt : : <toolset>msvc                     <variant>debug <name>icudtd <runtime-link>shared <link>shared <conditional>@path_options ;
 +
-+      lib icudt : : <toolset>darwin                                  <name>icudt <runtime-link>shared <link>static <conditional>@path_options ;
-+      lib icudt : : <toolset>darwin                                  <name>icudt <runtime-link>shared <link>shared <conditional>@path_options ;	  
-+      lib icudt : : <toolset>darwin                   <variant>debug <name>icudt <runtime-link>shared <link>static <conditional>@path_options ;
-+      lib icudt : : <toolset>darwin                   <variant>debug <name>icudt <runtime-link>shared <link>shared <conditional>@path_options ;
++      lib icudt : : <toolset>darwin                                  <name>icudata <runtime-link>shared <link>static <conditional>@path_options ;
++      lib icudt : : <toolset>darwin                                  <name>icudata <runtime-link>shared <link>shared <conditional>@path_options ;	  
++      lib icudt : : <toolset>darwin                   <variant>debug <name>icudata <runtime-link>shared <link>static <conditional>@path_options ;
++      lib icudt : : <toolset>darwin                   <variant>debug <name>icudata <runtime-link>shared <link>shared <conditional>@path_options ;
 +	  
        lib icudt : : <name>this_is_an_invalid_library_name ;
 -
