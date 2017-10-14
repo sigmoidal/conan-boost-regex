@@ -57,7 +57,12 @@ if ! $(disable-icu)
       lib icuuc : : <toolset>msvc                                    <name>icuuc <runtime-link>shared <link>shared <conditional>@path_options ;	  
       lib icuuc : : <toolset>msvc                     <variant>debug <name>sicuucd <runtime-link>shared <link>static <conditional>@path_options ;
       lib icuuc : : <toolset>msvc                     <variant>debug <name>icuucd <runtime-link>shared <link>shared <conditional>@path_options ;
-	  	
+	  
+      lib icuuc : : <toolset>clang-darwin                            <name>sicuuc <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icuuc : : <toolset>clang-darwin                            <name>icuuc <runtime-link>shared <link>shared <conditional>@path_options ;	  
+      lib icuuc : : <toolset>clang-darwin             <variant>debug <name>sicuucd <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icuuc : : <toolset>clang-darwin             <variant>debug <name>icuucd <runtime-link>shared <link>shared <conditional>@path_options ;
+	  
       lib icuuc : : <name>this_is_an_invalid_library_name ;
 	  
 	  
@@ -70,6 +75,11 @@ if ! $(disable-icu)
       lib icudt : : <toolset>msvc                                    <name>icudt <runtime-link>shared <link>shared <conditional>@path_options ;	  
       lib icudt : : <toolset>msvc                     <variant>debug <name>sicudtd <runtime-link>shared <link>static <conditional>@path_options ;
       lib icudt : : <toolset>msvc                     <variant>debug <name>icudtd <runtime-link>shared <link>shared <conditional>@path_options ;
+
+      lib icudt : : <toolset>clang-darwin                            <name>sicudt <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icudt : : <toolset>clang-darwin                            <name>icudt <runtime-link>shared <link>shared <conditional>@path_options ;	  
+      lib icudt : : <toolset>clang-darwin             <variant>debug <name>sicudtd <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icudt : : <toolset>clang-darwin             <variant>debug <name>icudtd <runtime-link>shared <link>shared <conditional>@path_options ;
 	  
       lib icudt : : <name>this_is_an_invalid_library_name ;
 	  
@@ -85,6 +95,11 @@ if ! $(disable-icu)
       lib icuin : : <toolset>msvc                                    <name>icuin <runtime-link>shared <link>shared <conditional>@path_options ;	  
       lib icuin : : <toolset>msvc                     <variant>debug <name>sicuind <runtime-link>shared <link>static <conditional>@path_options ;
       lib icuin : : <toolset>msvc                     <variant>debug <name>icuind <runtime-link>shared <link>shared <conditional>@path_options ;
+
+      lib icui18n : : <toolset>clang-darwin                            <name>sicui18n <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icui18n : : <toolset>clang-darwin                            <name>icui18n <runtime-link>shared <link>shared <conditional>@path_options ;	  
+      lib icui18n : : <toolset>clang-darwin             <variant>debug <name>sicui18nd <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icui18n : : <toolset>clang-darwin             <variant>debug <name>icui18nd <runtime-link>shared <link>shared <conditional>@path_options ;
 	  
       lib icuin : : <name>this_is_an_invalid_library_name ;
 
