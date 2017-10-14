@@ -113,12 +113,14 @@ if ! $(disable-icu)
          <runtime-link>static:<library>icuin
          <define>BOOST_HAS_ICU=1 
          <link>static:<define>U_STATIC_IMPLEMENTATION=1
+		 <toolset>msvc:<linkflags>advapi32.lib
          ;
    }
 
 }
 
-unit-test has_icu : has_icu_test.cpp : $(ICU_OPTS) <linkflags>advapi32.lib ;
+
+unit-test has_icu : has_icu_test.cpp : $(ICU_OPTS) ;
 explicit has_icu ;
 
 alias icu_options : : : : [ check-target-builds has_icu : $(ICU_OPTS) : ] ;
