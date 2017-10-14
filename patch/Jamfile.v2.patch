@@ -1,5 +1,5 @@
 --- Jamfile.v2	2017-10-14 04:53:47.324000000 +0300
-+++ Jamfile_new.v2	2017-10-14 18:30:56.905121400 +0300
++++ Jamfile_new.v2	2017-10-14 18:35:25.410087800 +0300
 @@ -49,48 +49,94 @@
     else
     {
@@ -100,7 +100,7 @@
 +         <link>static:<define>U_STATIC_IMPLEMENTATION=1
 +		 <toolset>msvc:<linkflags>advapi32.lib
 +		 <toolset>gcc:<cxxflags>-std=c++11
-+		 <toolset>gcc <link>static:<linkflags>dl
++		 <toolset>gcc <link>static:<linkflags>-ldl
           ;
     }
  
