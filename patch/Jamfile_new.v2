@@ -42,6 +42,15 @@ rule path_options ( properties * )
 	
 	
 	ECHO '================================================================================' ;
+	if <toolset>msvc in $(properties) 
+	{
+		ECHO 'I have <toolset>msvc' ;
+	}
+	if <link>static in $(properties) 
+	{
+		ECHO 'I have <link>static' ;
+	}
+
 	ECHO $(result) ;
 	
     return $(result) ;
