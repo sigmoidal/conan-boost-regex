@@ -1,6 +1,6 @@
 --- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
-+++ Jamfile_new.v2	2017-10-14 20:45:45.764911500 +0300
-@@ -16,14 +16,30 @@
++++ Jamfile_new.v2	2017-10-14 20:55:50.971763000 +0300
+@@ -16,14 +16,34 @@
  rule path_options ( properties * )
  {
      local result ;
@@ -30,10 +30,14 @@
 +    	result = $(result) <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
      }
 +	
++	
++	ECHO '================================================================================' ;
++	ECHO $(result) ;
++	
      return $(result) ;
  }
  
-@@ -49,48 +65,95 @@
+@@ -49,48 +69,95 @@
     else
     {
        lib icuuc : :                                                               <runtime-link>shared <conditional>@path_options ;
