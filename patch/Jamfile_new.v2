@@ -22,9 +22,7 @@ rule consumer_libs ( properties * )
     	result = $(result) <linkflags>advapi32.lib ;
     }
 	else if <toolset>gcc in $(properties)
-	{
-		result = $(result) <cxxflags>-std=c++11 ;
-		
+	{	
 		if <link>static in $(properties)
 		{
 			result = $(result) <linkflags>-ldl ;
@@ -37,6 +35,12 @@ rule consumer_libs ( properties * )
 rule path_options ( properties * )
 {
     local result ;
+	
+	if <toolset>gcc in $(properties)
+	{
+		result = $(result) <cxxflags>-std=c++11 ;
+	}
+	
 	
     if <address-model>64 in $(properties) && <toolset>msvc in $(properties) 
     {
