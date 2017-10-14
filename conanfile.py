@@ -45,7 +45,7 @@ class BoostRegexConan(ConanFile):
         if self.options.use_icu:
             # we need to patch the Jamfile.v2 of Boost.Regex (has_icu_test) when building static on windows 
             #if not self.options.shared and self.settings.os == 'Windows':
-            tools.download(r'https://raw.githubusercontent.com/sigmoidal/conan-boost-regex/testing/1.65.1/patch/Jamfile.v2.patch?{rand}'.format(randint(0, 1000), 'Jamfile.v2.patch');
+            tools.download(r'https://raw.githubusercontent.com/sigmoidal/conan-boost-regex/testing/1.65.1/patch/Jamfile.v2.patch?{rand}'.format(rand=randint(0, 1000)), 'Jamfile.v2.patch');
      
             src_path = os.path.join(self.conanfile_directory, 'regex')
             jamfile_to_patch = os.path.join(src_path, 'build', 'Jamfile.v2')
