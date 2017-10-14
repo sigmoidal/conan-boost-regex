@@ -25,14 +25,20 @@ rule path_options ( properties * )
     	result = <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
     }
 	
-#<toolset>msvc:<linkflags>advapi32.lib
-#<toolset>gcc:<cxxflags>-std=c++11
-#<toolset>gcc <link>static:<linkflags>-ldl
-
 	if <toolset>msvc in $(properties)
 	{
     	result = $(result) <linkflags>advapi32.lib ;
     }
+	
+	if <toolset>gcc in $(properties)
+	{
+		result = $(result) <cxxflags>-std=c++11 ;
+		
+		if <link>static in $(properties)
+		{
+			result = $(result) <linkflags>-ldl ;
+		}
+	}
 	
     return $(result) ;
 }
@@ -138,14 +144,15 @@ if ! $(disable-icu)
          <runtime-link>static:<library>icuin
          <define>BOOST_HAS_ICU=1 
          <link>static:<define>U_STATIC_IMPLEMENTATION=1
-		 <toolset>msvc:<linkflags>advapi32.lib
-		 <toolset>gcc:<cxxflags>-std=c++11
-		 <toolset>gcc <link>static:<linkflags>-ldl
          ;
    }
 
 }
 
+#		 <toolset>msvc:<linkflags>advapi32.lib
+#		 <toolset>gcc:<cxxflags>-std=c++11
+#		 <toolset>gcc <link>static:<linkflags>-ldl
+		 
 
 unit-test has_icu : has_icu_test.cpp : $(ICU_OPTS) ;
 explicit has_icu ;
