@@ -1,5 +1,5 @@
 --- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
-+++ Jamfile_new.v2	2017-10-14 03:48:11.913056900 +0300
++++ Jamfile_new.v2	2017-10-14 03:52:36.427146000 +0300
 @@ -49,49 +49,76 @@
     else
     {
@@ -16,10 +16,10 @@
 +      lib icuuc : : <toolset>msvc                     <variant>debug <name>sicuucd <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icuuc : : <toolset>msvc                     <variant>debug <name>icuucd <runtime-link>shared <link>shared <conditional>@path_options ;
 +	  
-+      lib icuuc : : <toolset>clang-darwin                            <name>sicuuc <runtime-link>shared <link>static <conditional>@path_options ;
-+      lib icuuc : : <toolset>clang-darwin                            <name>icuuc <runtime-link>shared <link>shared <conditional>@path_options ;	  
-+      lib icuuc : : <toolset>clang-darwin             <variant>debug <name>sicuucd <runtime-link>shared <link>static <conditional>@path_options ;
-+      lib icuuc : : <toolset>clang-darwin             <variant>debug <name>icuucd <runtime-link>shared <link>shared <conditional>@path_options ;
++      lib icuuc : : <toolset>darwin                                  <name>sicuuc <runtime-link>shared <link>static <conditional>@path_options ;
++      lib icuuc : : <toolset>darwin                                  <name>icuuc <runtime-link>shared <link>shared <conditional>@path_options ;	  
++      lib icuuc : : <toolset>darwin                   <variant>debug <name>sicuucd <runtime-link>shared <link>static <conditional>@path_options ;
++      lib icuuc : : <toolset>darwin                   <variant>debug <name>icuucd <runtime-link>shared <link>shared <conditional>@path_options ;
 +	  
        lib icuuc : : <name>this_is_an_invalid_library_name ;
 -
@@ -37,10 +37,10 @@
 +      lib icudt : : <toolset>msvc                     <variant>debug <name>sicudtd <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icudt : : <toolset>msvc                     <variant>debug <name>icudtd <runtime-link>shared <link>shared <conditional>@path_options ;
 +
-+      lib icudt : : <toolset>clang-darwin                            <name>sicudt <runtime-link>shared <link>static <conditional>@path_options ;
-+      lib icudt : : <toolset>clang-darwin                            <name>icudt <runtime-link>shared <link>shared <conditional>@path_options ;	  
-+      lib icudt : : <toolset>clang-darwin             <variant>debug <name>sicudtd <runtime-link>shared <link>static <conditional>@path_options ;
-+      lib icudt : : <toolset>clang-darwin             <variant>debug <name>icudtd <runtime-link>shared <link>shared <conditional>@path_options ;
++      lib icudt : : <toolset>darwin                                  <name>sicudt <runtime-link>shared <link>static <conditional>@path_options ;
++      lib icudt : : <toolset>darwin                                  <name>icudt <runtime-link>shared <link>shared <conditional>@path_options ;	  
++      lib icudt : : <toolset>darwin                   <variant>debug <name>sicudtd <runtime-link>shared <link>static <conditional>@path_options ;
++      lib icudt : : <toolset>darwin                   <variant>debug <name>icudtd <runtime-link>shared <link>shared <conditional>@path_options ;
 +	  
        lib icudt : : <name>this_is_an_invalid_library_name ;
 -
@@ -62,10 +62,10 @@
 +      lib icuin : : <toolset>msvc                     <variant>debug <name>sicuind <runtime-link>shared <link>static <conditional>@path_options ;
 +      lib icuin : : <toolset>msvc                     <variant>debug <name>icuind <runtime-link>shared <link>shared <conditional>@path_options ;
 +
-+      lib icui18n : : <toolset>clang-darwin                            <name>sicui18n <runtime-link>shared <link>static <conditional>@path_options ;
-+      lib icui18n : : <toolset>clang-darwin                            <name>icui18n <runtime-link>shared <link>shared <conditional>@path_options ;	  
-+      lib icui18n : : <toolset>clang-darwin             <variant>debug <name>sicui18nd <runtime-link>shared <link>static <conditional>@path_options ;
-+      lib icui18n : : <toolset>clang-darwin             <variant>debug <name>icui18nd <runtime-link>shared <link>shared <conditional>@path_options ;
++      lib icui18n : : <toolset>darwin                                <name>sicui18n <runtime-link>shared <link>static <conditional>@path_options ;
++      lib icui18n : : <toolset>darwin                                <name>icui18n <runtime-link>shared <link>shared <conditional>@path_options ;	  
++      lib icui18n : : <toolset>darwin                 <variant>debug <name>sicui18nd <runtime-link>shared <link>static <conditional>@path_options ;
++      lib icui18n : : <toolset>darwin                 <variant>debug <name>icui18nd <runtime-link>shared <link>shared <conditional>@path_options ;
 +	  
        lib icuin : : <name>this_is_an_invalid_library_name ;
  
