@@ -40,6 +40,10 @@ rule path_options ( properties * )
     	result = $(result) <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
     }
 	
+	
+	ECHO '================================================================================' ;
+	ECHO $(result) ;
+	
     return $(result) ;
 }
 
