@@ -53,7 +53,38 @@ def main(target_os):
                         print("[{os}] {cmdstr}".format(os=target_os, cmdstr=" ".join(cmd.split())))
                         os.system( cmd )
                             
-
+    elif target_os == 'macosx':
+    
+        #compiler_versions = [ "3.7", "3.8", "3.9", "4.0" ]
+        #compiler_versions = [ "4.0" ]
+    
+        compiler = "apple-clang"
+        compiler_versions = [ "9.0" ]
+    
+        # process arguments
+        for arch in archs:
+            for compiler_version in compiler_versions:
+                for build_type in build_types:
+                    for link in shared:
+                        cmd = 'conan create {channel} -k \
+                               -s arch={arch} \
+                               -s build_type={build_type} \
+                               -s compiler={compiler} \
+                               -s compiler.version={compiler_v} \
+                               -o {name}:use_icu=True \
+                               -o {name}:shared={link} \
+                               -o icu:shared={link} 2>&1 | tee {name}-{version}-{arch}-{build_type}-{link_str}-{used_compiler}.log'.format(name=name,
+                                                                                                                                           version=version,
+                                                                                                                                           channel=channel, 
+                                                                                                                                           arch=arch, 
+                                                                                                                                           compiler=compiler,
+                                                                                                                                           compiler_v=compiler_version,
+                                                                                                                                           used_compiler=compiler + '-' + compiler_version,
+                                                                                                                                           build_type=build_type,
+                                                                                                                                           link=str(link),
+                                                                                                                                           link_str='shared' if link else 'static')
+                        print("[{os}] {cmdstr}".format(os=target_os, cmdstr=" ".join(cmd.split())))
+                        os.system( cmd )
     else:
         usage()
         exit(1)
