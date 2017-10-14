@@ -19,11 +19,11 @@ rule path_options ( properties * )
 	
 	if <toolset>msvc in $(properties)
 	{
-    	result = <linkflags>advapi32.lib ;
+    	result = $(result) <linkflags>advapi32.lib ;
     }
 	else if <toolset>gcc in $(properties)
 	{
-		result = <cxxflags>-std=c++11 ;
+		result = $(result) <cxxflags>-std=c++11 ;
 		
 		if <link>static in $(properties)
 		{

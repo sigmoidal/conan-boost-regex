@@ -1,5 +1,5 @@
 --- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
-+++ Jamfile_new.v2	2017-10-14 20:31:54.426344900 +0300
++++ Jamfile_new.v2	2017-10-14 20:45:45.764911500 +0300
 @@ -16,14 +16,30 @@
  rule path_options ( properties * )
  {
@@ -7,11 +7,11 @@
 +	
 +	if <toolset>msvc in $(properties)
 +	{
-+    	result = <linkflags>advapi32.lib ;
++    	result = $(result) <linkflags>advapi32.lib ;
 +    }
 +	else if <toolset>gcc in $(properties)
 +	{
-+		result = <cxxflags>-std=c++11 ;
++		result = $(result) <cxxflags>-std=c++11 ;
 +		
 +		if <link>static in $(properties)
 +		{
