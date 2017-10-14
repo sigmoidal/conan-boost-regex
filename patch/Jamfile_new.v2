@@ -96,10 +96,10 @@ if ! $(disable-icu)
       lib icuin : : <toolset>msvc                     <variant>debug <name>sicuind <runtime-link>shared <link>static <conditional>@path_options ;
       lib icuin : : <toolset>msvc                     <variant>debug <name>icuind <runtime-link>shared <link>shared <conditional>@path_options ;
 
-      lib icui18n : : <toolset>darwin                                <name>icui18n <runtime-link>shared <link>static <conditional>@path_options ;
-      lib icui18n : : <toolset>darwin                                <name>icui18n <runtime-link>shared <link>shared <conditional>@path_options ;	  
-      lib icui18n : : <toolset>darwin                 <variant>debug <name>icui18n <runtime-link>shared <link>static <conditional>@path_options ;
-      lib icui18n : : <toolset>darwin                 <variant>debug <name>icui18n <runtime-link>shared <link>shared <conditional>@path_options ;
+      lib icuin : : <toolset>darwin                                  <name>icui18n <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icuin : : <toolset>darwin                                  <name>icui18n <runtime-link>shared <link>shared <conditional>@path_options ;	  
+      lib icuin : : <toolset>darwin                   <variant>debug <name>icui18n <runtime-link>shared <link>static <conditional>@path_options ;
+      lib icuin : : <toolset>darwin                   <variant>debug <name>icui18n <runtime-link>shared <link>shared <conditional>@path_options ;
 	  
       lib icuin : : <name>this_is_an_invalid_library_name ;
 
