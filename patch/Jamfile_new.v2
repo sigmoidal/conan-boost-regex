@@ -13,7 +13,7 @@ project : requirements
 
 local disable-icu = [ MATCH (--disable-icu) : [ modules.peek : ARGV ] ] ;
 
-rule path_options ( properties * )
+rule consumer_libs ( properties * )
 {
     local result ;
 	
@@ -31,6 +31,13 @@ rule path_options ( properties * )
 		}
 	}
 	
+    return $(result) ;
+}
+
+rule path_options ( properties * )
+{
+    local result ;
+	
     if <address-model>64 in $(properties) && <toolset>msvc in $(properties) 
     {
     	result = $(result) <search>$(ICU_PATH)/bin64 <search>$(ICU_PATH)/lib64 ;
@@ -39,19 +46,6 @@ rule path_options ( properties * )
     {
     	result = $(result) <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
     }
-	
-	
-	ECHO '================================================================================' ;
-	if <toolset>msvc in $(properties) 
-	{
-		ECHO 'I have <toolset>msvc' ;
-	}
-	if <link>static in $(properties) 
-	{
-		ECHO 'I have <link>static' ;
-	}
-
-	ECHO $(result) ;
 	
     return $(result) ;
 }
@@ -167,7 +161,7 @@ if ! $(disable-icu)
 #		 <toolset>gcc <link>static:<linkflags>-ldl
 		 
 
-exe has_icu : has_icu_test.cpp : $(ICU_OPTS) ;
+unit-test has_icu : has_icu_test.cpp : $(ICU_OPTS) <conditional>@consumer_libs ;
 explicit has_icu ;
 
 alias icu_options : : : : [ check-target-builds has_icu : $(ICU_OPTS) : ] ;
@@ -198,7 +192,7 @@ lib boost_regex : ../src/$(SOURCES) icu_options
 	     <toolset>gcc-cygwin:<link>static
     ;
 
-boost-install boost_regex ;
+#boost-install boost_regex ;
 
 
 

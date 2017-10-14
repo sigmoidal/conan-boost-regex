@@ -1,9 +1,12 @@
 --- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
-+++ Jamfile_new.v2	2017-10-14 22:15:06.128091200 +0300
-@@ -16,14 +16,43 @@
- rule path_options ( properties * )
- {
-     local result ;
++++ Jamfile_new.v2	2017-10-14 23:01:19.441257200 +0300
+@@ -13,17 +13,40 @@
+ 
+ local disable-icu = [ MATCH (--disable-icu) : [ modules.peek : ARGV ] ] ;
+ 
++rule consumer_libs ( properties * )
++{
++    local result ;
 +	
 +	if <toolset>msvc in $(properties) && <link>static in $(properties) 
 +	{
@@ -19,6 +22,13 @@
 +		}
 +	}
 +	
++    return $(result) ;
++}
++
+ rule path_options ( properties * )
+ {
+     local result ;
++	
      if <address-model>64 in $(properties) && <toolset>msvc in $(properties) 
      {
 -    	result = <search>$(ICU_PATH)/bin64 <search>$(ICU_PATH)/lib64 ;
@@ -30,23 +40,10 @@
 +    	result = $(result) <search>$(ICU_PATH)/bin <search>$(ICU_PATH)/lib ;
      }
 +	
-+	
-+	ECHO '================================================================================' ;
-+	if <toolset>msvc in $(properties) 
-+	{
-+		ECHO 'I have <toolset>msvc' ;
-+	}
-+	if <link>static in $(properties) 
-+	{
-+		ECHO 'I have <link>static' ;
-+	}
-+
-+	ECHO $(result) ;
-+	
      return $(result) ;
  }
  
-@@ -49,49 +78,96 @@
+@@ -49,49 +72,96 @@
     else
     {
        lib icuuc : :                                                               <runtime-link>shared <conditional>@path_options ;
@@ -155,7 +152,16 @@
 +#		 <toolset>gcc <link>static:<linkflags>-ldl
 +		 
 +
-+exe has_icu : has_icu_test.cpp : $(ICU_OPTS) ;
++unit-test has_icu : has_icu_test.cpp : $(ICU_OPTS) <conditional>@consumer_libs ;
  explicit has_icu ;
  
  alias icu_options : : : : [ check-target-builds has_icu : $(ICU_OPTS) : ] ;
+@@ -122,7 +192,7 @@
+ 	     <toolset>gcc-cygwin:<link>static
+     ;
+ 
+-boost-install boost_regex ;
++#boost-install boost_regex ;
+ 
+ 
+ 
