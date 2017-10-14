@@ -130,6 +130,7 @@ if ! $(disable-icu)
          <link>static:<define>U_STATIC_IMPLEMENTATION=1
 		 <toolset>msvc:<linkflags>advapi32.lib
 		 <toolset>gcc:<cxxflags>-std=c++11
+		 <toolset>gcc:<link>static/<linkflags>dl
          ;
    }
 

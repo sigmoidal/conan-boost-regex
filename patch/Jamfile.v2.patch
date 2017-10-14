@@ -1,6 +1,6 @@
 --- Jamfile.v2	2017-10-14 04:53:47.324000000 +0300
-+++ Jamfile_new.v2	2017-10-14 18:18:23.858086900 +0300
-@@ -49,48 +49,93 @@
++++ Jamfile_new.v2	2017-10-14 18:23:12.341521300 +0300
+@@ -49,48 +49,94 @@
     else
     {
        lib icuuc : :                                                               <runtime-link>shared <conditional>@path_options ;
@@ -100,6 +100,7 @@
 +         <link>static:<define>U_STATIC_IMPLEMENTATION=1
 +		 <toolset>msvc:<linkflags>advapi32.lib
 +		 <toolset>gcc:<cxxflags>-std=c++11
++		 <toolset>gcc:<link>static/<linkflags>dl
           ;
     }
  
