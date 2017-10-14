@@ -1,5 +1,5 @@
 --- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
-+++ Jamfile_new.v2	2017-10-14 21:46:05.719587400 +0300
++++ Jamfile_new.v2	2017-10-14 22:15:06.128091200 +0300
 @@ -16,14 +16,43 @@
  rule path_options ( properties * )
  {
@@ -46,7 +46,7 @@
      return $(result) ;
  }
  
-@@ -49,48 +78,95 @@
+@@ -49,49 +78,96 @@
     else
     {
        lib icuuc : :                                                               <runtime-link>shared <conditional>@path_options ;
@@ -149,11 +149,13 @@
  
  }
  
+-unit-test has_icu : has_icu_test.cpp : $(ICU_OPTS) ;
 +#		 <toolset>msvc:<linkflags>advapi32.lib
 +#		 <toolset>gcc:<cxxflags>-std=c++11
 +#		 <toolset>gcc <link>static:<linkflags>-ldl
 +		 
 +
- unit-test has_icu : has_icu_test.cpp : $(ICU_OPTS) ;
++exe has_icu : has_icu_test.cpp : $(ICU_OPTS) ;
  explicit has_icu ;
  
+ alias icu_options : : : : [ check-target-builds has_icu : $(ICU_OPTS) : ] ;
