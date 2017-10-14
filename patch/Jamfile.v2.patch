@@ -1,6 +1,6 @@
 --- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
-+++ Jamfile_new.v2	2017-10-14 21:21:38.234240400 +0300
-@@ -16,14 +16,34 @@
++++ Jamfile_new.v2	2017-10-14 21:46:05.719587400 +0300
+@@ -16,14 +16,43 @@
  rule path_options ( properties * )
  {
      local result ;
@@ -32,12 +32,21 @@
 +	
 +	
 +	ECHO '================================================================================' ;
++	if <toolset>msvc in $(properties) 
++	{
++		ECHO 'I have <toolset>msvc' ;
++	}
++	if <link>static in $(properties) 
++	{
++		ECHO 'I have <link>static' ;
++	}
++
 +	ECHO $(result) ;
 +	
      return $(result) ;
  }
  
-@@ -49,48 +69,95 @@
+@@ -49,48 +78,95 @@
     else
     {
        lib icuuc : :                                                               <runtime-link>shared <conditional>@path_options ;
