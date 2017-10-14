@@ -1,11 +1,11 @@
 --- Jamfile.v2	2017-10-12 02:38:09.133026300 +0300
-+++ Jamfile_new.v2	2017-10-14 20:55:50.971763000 +0300
++++ Jamfile_new.v2	2017-10-14 21:21:38.234240400 +0300
 @@ -16,14 +16,34 @@
  rule path_options ( properties * )
  {
      local result ;
 +	
-+	if <toolset>msvc in $(properties)
++	if <toolset>msvc in $(properties) && <link>static in $(properties) 
 +	{
 +    	result = $(result) <linkflags>advapi32.lib ;
 +    }

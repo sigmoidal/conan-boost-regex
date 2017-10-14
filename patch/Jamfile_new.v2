@@ -17,7 +17,7 @@ rule path_options ( properties * )
 {
     local result ;
 	
-	if <toolset>msvc in $(properties)
+	if <toolset>msvc in $(properties) && <link>static in $(properties) 
 	{
     	result = $(result) <linkflags>advapi32.lib ;
     }
