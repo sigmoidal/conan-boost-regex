@@ -29,7 +29,9 @@ class BoostRegexConan(ConanFile):
                       "Boost.Type_Traits/1.65.1@bincrafters/testing"    
 
                       #assert1 concept_check5 config0 core2 functional5 integer3 iterator5 mpl5 predef0 smart_ptr4 static_assert1 throw_exception2 type_traits3
-                      
+
+    patch_url = r'https://raw.githubusercontent.com/sigmoidal/conan-boost-regex/testing/1.65.1/patch/Jamfile.v2.patch?{rand}'.format(rand=randint(0, 1000))
+     
     def requirements(self):
         if self.options.use_icu:
             self.requires("icu/59.1@bincrafters/testing")
@@ -43,16 +45,12 @@ class BoostRegexConan(ConanFile):
             os.rename(lib_short_name + "-" + archive_name, lib_short_name)
             
         if self.options.use_icu:
-            # we need to patch the Jamfile.v2 of Boost.Regex (has_icu_test) when building static on windows 
-            #if not self.options.shared and self.settings.os == 'Windows':
-            tools.download(r'https://raw.githubusercontent.com/sigmoidal/conan-boost-regex/testing/1.65.1/patch/Jamfile.v2.patch?{rand}'.format(rand=randint(0, 1000)), 'Jamfile.v2.patch');
+            # we need to patch the Jamfile.v2 of Boost.Regex (has_icu_test) to enable linking against static ICU
+            self.output.info("Fetching patch: %s" % self.patch_url)
+            tools.download(self.patch_url, 'Jamfile.v2.patch');
      
-            src_path = os.path.join(self.conanfile_directory, 'regex')
-            jamfile_to_patch = os.path.join(src_path, 'build', 'Jamfile.v2')
+            jamfile_to_patch = os.path.join('regex', 'build', 'Jamfile.v2')
             self.output.info("Patching: " + jamfile_to_patch)
-            #self.output.info("cur: " + os.path.join(os.getcwd(), 'regex', 'build'))
-            
-            # to apply in subfolder
             tools.patch(base_path=os.path.join('regex', 'build'), patch_file="Jamfile.v2.patch") 
 
             
@@ -65,7 +63,7 @@ class BoostRegexConan(ConanFile):
         self.run(self.deps_user_info['Boost.Generator'].b2_command)
 
     def package(self):
-        self.copy(pattern="*", dst="lib", src="stage/lib")
+        self.copy(pattern="*", dst="lib", src="stage/lib", symlinks=True)
         for lib_short_name in self.lib_short_names:
             include_dir = os.path.join(lib_short_name, "include")
             self.copy(pattern="*", dst="include", src=include_dir)
